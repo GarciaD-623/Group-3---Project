@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Location</title>
+    <style>
+        * {
+            margin: 0;
+            padding 0;
+            box-sizing: border-box;
+
+        }
+        main {
+            max-width: 1900px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-content: center;
+            text-align: center;
+            margin: 40px 20px 0 20px;
+        }
+        .container .header {
+
+        }
+            .container .header h1 {
+                font-size: 3em;
+                margin: 30px 0;
+                font-size: 2.5em;
+                font-weight: bold;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                color: #222;
+               
+            }
+        .container .box{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        
+        }
+       .container .box .coloumn {
+                display: flex;
+                flex-direction: column;
+                width: 32.5%;
+
+            }
+        .container .box .coloumn img {
+            width: 100%;
+            padding-bottom: 15px;
+            border-radius: 5px;
+
+        }
+        @media only screen and (max-width: 769px){
+            .container .box {
+                flex-direction: column;
+            }
+            .container .box .coloumn {
+                    width: 100%;
+                }
+        }
+        @media only screen and (max-width: 643px) {
+            .container .header {
+                width: 100%;
+            }
+            .container .header h1 {
+                font-size: 1em;
+            }
+        }
+        .image {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+            .image:hover {
+                transform: scale(1.05);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+        }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+        .landmark-name {
+            font-size: 1.7em;
+            margin: 5px 0;
+            font-weight: bold;
+            color: #444;
+        }
+        .landmark img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        footer {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+            footer button {
+                padding: 12px 24px;
+                font-size: 1em;
+                background-color: #007BFF;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+                footer button:hover {
+                    background-color: #0056b3;
+                }
+    </style>
+
+</head>
+<body>
+    <main>
+        <div class="container">
+            <div class="header">
+                <h1>BEST LOCATIONS</h1>
+            </div>
+
+            <div class="box">
+
+                <div class="coloumn">
+                    <div class="image" onclick="openModal('Japanese Cemetery','NBP Reservasion Area, Poblacion Muntinlupa', 'JapCemetery.jpg')">
+                        <img src="JapCemetery.jpg" alt="Landmark Image 5">
+                    </div>
+                    <div class="image"onclick="openModal('Museo ng Muntinlupa','Centennial Ave. Tunasan Muntinlupa', 'Museo.jpg')">
+                        <img src="Museo.jpg" alt="Landmark Image 9">
+                    </div>
+                    <div class="image" onclick="openModal('Festival Supermall Alabang', 'Filinvest City, Alabang Muntinlupa','festival mall.jpg')">
+                        <img src="festival mall.jpg" alt="Festival mall image">
+                    </div>
+                    <div class="image" onclick="openModal('Ayala Malls Southpark', 'Muntinlupa National Road, Alabang Muntinlupa', 'south park.jpg')">
+                        <img src="south park.jpg" alr="Ayala mall image">
+                    </div>
+                </div>
+
+                <div class="coloumn">
+                    <div class="image" onclick="openModal('Alabang Town Center', 'Theater Dr. Alabang Muntinlupa', 'towncenter.jpg')">
+                        <img src="towncenter.jpg">
+                    </div>
+                        <div class="image" onclick="openModal('Filinvest Central Park', 'Filinvest City, Alabang Muntinlupa', 'central park.jpg')">
+                        <img src="central park.jpg">
+                    </div>
+                        <div class="image" onclick="openModal('Landmark Mall', 'Civic Dr. Alabang Muntinlupa', 'festival mall 3.jpg')">
+                        <img src="festival mall 3.jpg">
+                    </div>
+                        <div class="image" onclick="openModal('Filinvest Bike Trail', 'Filinvest Ave. Alabang Muntinlupa', 'filinvest bike trail.jpg')">
+                        <img src="filinvest bike trail.jpg">
+                    </div>
+                </div>
+
+                <div class="coloumn">
+                    <div class="image" onclick="openModal('Jamboree-Lake', 'NBP Reservasion Area, Poblacion Muntinlupa', 'Jamboree-Lake.jpg')">
+                        <img src="Jamboree-Lake.jpg">
+                    </div>
+
+                    <div class="image" onclick="openModal('Angelis Resort', '1151 Amparo st. Poblacion Muntinlupa', 'angelis resort.jpg')">
+                        <img src="angelis resort.jpg">
+                    </div>
+
+                    <div class="image" onclick="openModal('Alabang Filinvest Area', 'Filinvest City, Alabang Muntinlupa', 'festival mall 2.jpg')">
+                        <img src="festival mall 2.jpg">
+                    </div>
+
+                    <div class="image" onclick="openModal('New Bilibid Prison', 'NBP Reservasion Area, Poblacion Muntinlupa', 'BilibidP.jpg')">
+                        <img src="BilibidP.jpg">
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <img id="modalImage" src="" alt="Landmark Image">
+                <h2 id="modalName" class="landmark-name"></h2>
+                <p id="modalDescription" class="landmark-description"></p>
+            </div>
+        </div>
+        <div class="container2">
+
+
+
+
+
+
+
+
+        </div>
+
+
+        <footer>
+            <button onclick="history.back()">Return</button>
+        </footer>
+
+
+    </main>
+    <script>
+        function openModal(name, description, imageSrc) {
+            document.getElementById("modalName").textContent = name;
+            document.getElementById("modalDescription").textContent = description;
+            document.getElementById("modalImage").src = imageSrc;
+            document.getElementById("myModal").style.display = "flex";
+            setTimeout(() => {
+                document.querySelector('.modal-content').style.transform = 'scale(1)';
+            }, 50);
+        }
+
+        function closeModal() {
+            document.querySelector('.modal-content').style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                document.getElementById("myModal").style.display = "none";
+            }, 300);
+        }
+
+        window.onclick = function (event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

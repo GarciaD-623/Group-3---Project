@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historical Landmarks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        header h1 {
+            margin: 30px 0;
+            font-size: 2.5em;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #222;
+            text-align: center;
+        }
+
+        .landmarks-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: minmax(300px, auto);
+            gap: 20px;
+            padding: 40px;
+            max-width: 1900px;
+            margin: 0 auto;
+        }
+
+        .landmark {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .landmark img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .landmark:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .landmark-name {
+            font-size: 1.7em;
+            margin: 5px 0;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .landmark-description {
+            font-size: 1.2em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        footer button {
+            padding: 12px 24px;
+            font-size: 1em;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        footer button:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 1024px) {
+            .landmarks-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-content {
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .landmarks-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            .modal img {
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Historical Landmarks</h1>
+    </header>
+
+    <section class="landmarks-grid">
+        <div class="landmark" onclick="openModal('Bagong Bilangguang Bilibid', 'Constructed by virtue of Commonwealth Law #67 as a replacement of the Bilibid Viejo in Sta. Cruz, Manila, the construction commenced in 1936 and was completed year 1940 marking the date of transfer of the Bureau of Prison from Manila to Muntinlupa on November 15, 1940. The National Bilibid Prison was officially named the New Bilibid Prison in January 22, 1941.', 'BilibidP.jpg')">
+            <img src="BilibidP.jpg" alt="Landmark Image 1">
+        </div>
+        <div class="landmark" onclick="openModal('Biological Production Services Building', 'The Alabang Biological Production Services rose as one of the very first Art Deco buildings in the Philippines in 1924. Being a major government research unit and vaccine laboratory in the 20th Century as the Alabang Serum and Vaccine Laboratory of the Department of Health, it was also known as a place “where miracles happened,” leading the Japanese Imperial Army to convert the building into a hospital during the height of World War II.', 'BiolProServices.jpg')">
+            <img src="BiolProServices.jpg" alt="Landmark Image 2">
+        </div>
+        <div class="landmark" onclick="openModal('Director’s Quarters', 'The Director’s Quarters serves as the official residence of the Director of the Bureau of Prisons. Built simultaneously with the New Bilibid Prison Administration Building in 1940, the structure boasts a well-preserved pre-war architecture that characterizes its outstanding edifice.', 'Directors.jpg')">
+            <img src="Directors.jpg" alt="Landmark Image 3">
+        </div>
+        <div class="landmark" onclick="openModal('Jamboree Lake', 'Jamboree Lake is the smallest in the Philippines. Upon the transfer of the Bilibid Prison to Muntinlupa, prison inmates from the Cordilleras developed the lands surrounding the lake into terraces that once served as a food production unit for the officials and inmates of the New Bilibid Prison.', 'Jamboree-Lake.jpg')">
+            <img src="Jamboree-Lake.jpg" alt="Landmark Image 4">
+        </div>
+        <div class="landmark" onclick="openModal('Japanese Cemetery', 'The Japanese Cemetery is a garden cemetery located inside the NBP Reservation Compound dedicated to the Japanese Soldiers who died in Muntinlupa. This is the burial place of imprisoned Japanese soldiers during the war who were executed. Legend has it that General Tomoyuki Yamashita, tagged as the “Tiger of Malaya,” was buried in the same place. Japanese tourists drop by the cemetery to pay respect to their ancestors. A Filipino-Japanese Peace Monument is also located in the area.', 'JapCemetery.jpg')">
+            <img src="JapCemetery.jpg" alt="Landmark Image 5">
+        </div>
+        <div class="landmark" onclick="openModal('Liwasan ng mga Bayani', 'Dedicated to Muntinlupeño Guerillas and other unsung heroes who fought for the liberation of Muntinlupa from the occupation of the Japanese imperial army, the Liwasan ng mga Bayani monument was installed on February 4, 2018, during the 73rd commemoration of the Muntinlupa Liberation Day Anniversary.', 'Liwasanngbayani.jpg')">
+            <img src="Liwasanngbayani.jpg" alt="Landmark Image 6">
+        </div>
+        <div class="landmark" onclick="openModal('Memorial Hill', 'The Memorial Hill was the burial place of Major Eriberto B. Misa Sr. which served as a tribute to the former Bureau of Prison Director for his 12 years of service, making him the longest-serving prison director up to this date. This hill located inside the New Bilibid Prison Reservation in Muntinlupa City cradles a vintage Japanese cannon used during the war and a grotto statue of Our Lady of Lourdes where regular masses in the early 1950s were held before the establishment and installation of the Our Lady of Mercy Chaplaincy.', 'MemorialHill.jpg')">
+            <img src="MemorialHill.jpg" alt="Landmark Image 7">
+        </div>
+        <div class="landmark" onclick="openModal('Memorial for Peace (Osawa Shrine)', 'A Memorial for Peace shrine dedicated to Kiyoshi Osawa for his Outstanding Achievement in the Promotion of Philippines-Japan Relations.', 'MemorialPeaceMonument.jpg')">
+            <img src="MemorialPeaceMonument.jpg" alt="Landmark Image 8">
+        </div>
+        <div class="landmark" onclick="openModal('Museo ng Muntinlupa', 'Museo ng Muntinlupa is a five-storey city museum mandated to be a cultural and educational venue in presenting the history, heritage and culture of Muntinlupeños. This museum is a division under the Tourism, Culture, and the Arts Department (TCAD). Museo ng Muntinlupa opened officially to the public in 2019, and reopened last October 03, 2022 after a two-year closure due to the COVID-19 pandemic.', 'Museo.jpg')">
+            <img src="Museo.jpg" alt="Landmark Image 9">
+        </div>
+        <div class="landmark" onclick="openModal('Rizal-Laguna Marker', 'The Rizal-Laguna Boundary Marker is an evidence of history that the City of Muntinlupa was a part of the Province of Rizal before its transfer to the newly formed Metropolitan Manila in 1975.', 'RizalLagunaMarker.jpg')">
+            <img src="RizalLagunaMarker.jpg" alt="Landmark Image 10">
+        </div>
+       
+    </section>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img id="modalImage" src="" alt="Landmark Image">
+            <h2 id="modalName" class="landmark-name"></h2>
+            <p id="modalDescription" class="landmark-description"></p>
+        </div>
+    </div>
+
+    <footer>
+        <button onclick="history.back()">Return</button>
+    </footer>
+
+    <script>
+        function openModal(name, description, imageSrc) {
+            document.getElementById("modalName").textContent = name;
+            document.getElementById("modalDescription").textContent = description;
+            document.getElementById("modalImage").src = imageSrc;
+            document.getElementById("myModal").style.display = "flex";
+            setTimeout(() => {
+                document.querySelector('.modal-content').style.transform = 'scale(1)';
+            }, 50);
+        }
+
+        function closeModal() {
+            document.querySelector('.modal-content').style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                document.getElementById("myModal").style.display = "none";
+            }, 300);
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
